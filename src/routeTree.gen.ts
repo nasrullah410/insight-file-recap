@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountsRouteImport } from './routes/accounts'
+import { Route as CampaignsRouteImport } from './routes/campaigns'
+import { Route as PersonalizationRouteImport } from './routes/personalization'
+import { Route as ProspectsRouteImport } from './routes/prospects'
+import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as TemplatesRouteImport } from './routes/templates'
+import { Route as CampaignsCampaignIdRouteImport } from './routes/campaigns_.$campaignId'
+import { Route as CampaignsNewRouteImport } from './routes/campaigns_.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountsRoute = AccountsRouteImport.update({
+  id: '/accounts',
+  path: '/accounts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampaignsRoute = CampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonalizationRoute = PersonalizationRouteImport.update({
+  id: '/personalization',
+  path: '/personalization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProspectsRoute = ProspectsRouteImport.update({
+  id: '/prospects',
+  path: '/prospects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksRoute = TasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemplatesRoute = TemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampaignsCampaignIdRoute = CampaignsCampaignIdRouteImport.update({
+  id: '/campaigns_/$campaignId',
+  path: '/campaigns/$campaignId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampaignsNewRoute = CampaignsNewRouteImport.update({
+  id: '/campaigns_/new',
+  path: '/campaigns/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accounts': typeof AccountsRoute
+  '/campaigns': typeof CampaignsRoute
+  '/personalization': typeof PersonalizationRoute
+  '/prospects': typeof ProspectsRoute
+  '/tasks': typeof TasksRoute
+  '/templates': typeof TemplatesRoute
+  '/campaigns/$campaignId': typeof CampaignsCampaignIdRoute
+  '/campaigns/new': typeof CampaignsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accounts': typeof AccountsRoute
+  '/campaigns': typeof CampaignsRoute
+  '/personalization': typeof PersonalizationRoute
+  '/prospects': typeof ProspectsRoute
+  '/tasks': typeof TasksRoute
+  '/templates': typeof TemplatesRoute
+  '/campaigns/$campaignId': typeof CampaignsCampaignIdRoute
+  '/campaigns/new': typeof CampaignsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accounts': typeof AccountsRoute
+  '/campaigns': typeof CampaignsRoute
+  '/personalization': typeof PersonalizationRoute
+  '/prospects': typeof ProspectsRoute
+  '/tasks': typeof TasksRoute
+  '/templates': typeof TemplatesRoute
+  '/campaigns_/$campaignId': typeof CampaignsCampaignIdRoute
+  '/campaigns_/new': typeof CampaignsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/accounts'
+    | '/campaigns'
+    | '/personalization'
+    | '/prospects'
+    | '/tasks'
+    | '/templates'
+    | '/campaigns/$campaignId'
+    | '/campaigns/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/accounts'
+    | '/campaigns'
+    | '/personalization'
+    | '/prospects'
+    | '/tasks'
+    | '/templates'
+    | '/campaigns/$campaignId'
+    | '/campaigns/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/accounts'
+    | '/campaigns'
+    | '/personalization'
+    | '/prospects'
+    | '/tasks'
+    | '/templates'
+    | '/campaigns_/$campaignId'
+    | '/campaigns_/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountsRoute: typeof AccountsRoute
+  CampaignsRoute: typeof CampaignsRoute
+  PersonalizationRoute: typeof PersonalizationRoute
+  ProspectsRoute: typeof ProspectsRoute
+  TasksRoute: typeof TasksRoute
+  TemplatesRoute: typeof TemplatesRoute
+  CampaignsCampaignIdRoute: typeof CampaignsCampaignIdRoute
+  CampaignsNewRoute: typeof CampaignsNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accounts': {
+      id: '/accounts'
+      path: '/accounts'
+      fullPath: '/accounts'
+      preLoaderRoute: typeof AccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campaigns': {
+      id: '/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof CampaignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personalization': {
+      id: '/personalization'
+      path: '/personalization'
+      fullPath: '/personalization'
+      preLoaderRoute: typeof PersonalizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prospects': {
+      id: '/prospects'
+      path: '/prospects'
+      fullPath: '/prospects'
+      preLoaderRoute: typeof ProspectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks': {
+      id: '/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates': {
+      id: '/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof TemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campaigns_/$campaignId': {
+      id: '/campaigns_/$campaignId'
+      path: '/campaigns/$campaignId'
+      fullPath: '/campaigns/$campaignId'
+      preLoaderRoute: typeof CampaignsCampaignIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campaigns_/new': {
+      id: '/campaigns_/new'
+      path: '/campaigns/new'
+      fullPath: '/campaigns/new'
+      preLoaderRoute: typeof CampaignsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountsRoute: AccountsRoute,
+  CampaignsRoute: CampaignsRoute,
+  PersonalizationRoute: PersonalizationRoute,
+  ProspectsRoute: ProspectsRoute,
+  TasksRoute: TasksRoute,
+  TemplatesRoute: TemplatesRoute,
+  CampaignsCampaignIdRoute: CampaignsCampaignIdRoute,
+  CampaignsNewRoute: CampaignsNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

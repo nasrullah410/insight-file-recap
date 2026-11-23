@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Account/campaign health rules live as pure functions in `src/lib/account-health.ts` (tested in `account-health.test.ts`); UI only reads their output — keeps limit logic in one testable place.
+- Data currently comes from deterministic sample data in `src/lib/demo-data.ts` with a fixed `NOW`, accessed only through `useScopedData()` in `src/lib/workspace.tsx` — swap that hook's source when wiring a real backend; fixed time avoids SSR hydration mismatches.
+- Workspace (tenant) selection is React context in `WorkspaceProvider`; every view must filter through `useScopedData()` so multi-tenant scoping stays consistent.
