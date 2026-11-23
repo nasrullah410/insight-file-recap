@@ -188,7 +188,7 @@ function CampaignDetailPage() {
                 <div className="flex items-start gap-3">
                   <AccountAvatar name={a.name} status={a.status} />
                   <div className="min-w-0 flex-1">
-                    <Link to="/accounts/$accountId" params={{ accountId: a.id }} className="font-medium hover:text-primary">{a.name}</Link>
+                    <Link to="/accounts" search={{ account: a.id }} className="font-medium hover:text-primary">{a.name}</Link>
                     <p className="truncate text-[12px] text-subtle-foreground">{a.headline}</p>
                   </div>
                   <StatusBadge status={a.status} />

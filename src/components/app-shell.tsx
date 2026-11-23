@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import type { FileRoutesByTo } from "@/routeTree.gen";
 import { CommandSearch } from "@/components/command-search";
-import { CONVERSATIONS } from "@/lib/data/conversations";
 import { PERSONALIZATION } from "@/lib/data/personalization";
 import { TASKS } from "@/lib/data/tasks";
 
@@ -91,7 +90,6 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const needsAttention = accounts.filter((a) => a.status !== "healthy").length;
   const openTasks = scope(TASKS).filter((t) => t.status === "pending_approval").length;
   const toPersonalize = scope(PERSONALIZATION).length;
-  const unread = scope(CONVERSATIONS).filter((c) => c.unread && !c.archived).length;
   const itemClass =
     "group flex h-8 items-center gap-2.5 rounded-md px-2.5 text-[13px] font-medium text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:text-subtle-foreground";
   const activeClass = "bg-accent text-primary [&_svg]:text-primary hover:bg-accent hover:text-primary";
@@ -105,13 +103,18 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
       {badge}
     </Link>
   );
+  const soon = (label: string, Icon: typeof Zap) => (
+    <span key={label} title="Coming soon" className={cn(itemClass, "cursor-not-allowed opacity-50 hover:bg-transparent hover:text-sidebar-foreground")}>
+      <Icon /> {label}
+    </span>
+  );
   return (
     <nav className="space-y-5">
       <div className="space-y-0.5">
         <span className="eyebrow block px-2.5 pb-1.5">Monitor</span>
         {link("/", "Overview", LayoutDashboard, undefined, true)}
         {link("/accounts", "LinkedIn accounts", Zap, count(needsAttention, "warning"))}
-        {link("/activity", "Activity log", Activity)}
+        {soon("Activity log", Activity)}
       </div>
       <div className="space-y-0.5">
         <span className="eyebrow block px-2.5 pb-1.5">Outreach</span>
@@ -119,19 +122,19 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
         {link("/templates", "Templates", FileText)}
         {link("/tasks", "SDR Task Center", CheckSquare, count(openTasks))}
         {link("/personalization", "Needs personalization", Sparkles, count(toPersonalize, "warning"))}
-        {link("/queue", "Sending queue", ListOrdered)}
+        {soon("Sending queue", ListOrdered)}
       </div>
       <div className="space-y-0.5">
         <span className="eyebrow block px-2.5 pb-1.5">Pipeline</span>
         {link("/prospects", "Prospects & lists", UserSquare2)}
-        {link("/replies", "Replies", Reply)}
-        {link("/inbox", "Inbox", Inbox, count(unread))}
+        {soon("Replies", Reply)}
+        {soon("Inbox", Inbox)}
       </div>
       <div className="space-y-0.5">
         <span className="eyebrow block px-2.5 pb-1.5">Admin</span>
-        {link("/team", "Team & roles", Users)}
-        {link("/admin", "Super-admin", ShieldCheck)}
-        {link("/settings", "Settings", Settings)}
+        {soon("Team & roles", Users)}
+        {soon("Super-admin", ShieldCheck)}
+        {soon("Settings", Settings)}
       </div>
     </nav>
   );
